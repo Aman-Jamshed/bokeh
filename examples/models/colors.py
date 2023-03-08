@@ -1,4 +1,5 @@
-"""This example demonstrates the usage of grouping different shades of same color together using bokeh groups.
+'''This example demonstrates the usage of grouping different shades
+of same color together using bokeh groups.
 
 A hover tooltip displays the link of the color to go to.
 
@@ -9,7 +10,7 @@ Navigate to the specific color by tapping.
     :refs: :ref:`ug_interaction_tools_hover_tool`, :ref:`ug_interaction_tools_tap_tool` 
     :keywords: groups, hover, color, tap, tooltip
 
-"""
+'''
 from math import pi
 
 import pandas as pd

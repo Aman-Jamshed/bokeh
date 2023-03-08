@@ -1,4 +1,4 @@
-'''This example demonstrates the usage of grouping different shades of same color together using bokeh groups.
+"""This example demonstrates the usage of grouping different shades of same color together using bokeh groups.
 
 A hover tooltip displays the link of the color to go to.
 
@@ -9,7 +9,7 @@ Navigate to the specific color by tapping.
     :refs: :ref:`ug_interaction_tools_hover_tool`, :ref:`ug_interaction_tools_tap_tool` 
     :keywords: groups, hover, color, tap, tooltip
 
-'''
+"""
 from math import pi
 
 import pandas as pd
@@ -17,8 +17,17 @@ import pandas as pd
 from bokeh.colors import groups
 from bokeh.document import Document
 from bokeh.embed import file_html
-from bokeh.models import (CategoricalAxis, CategoricalScale, ColumnDataSource,
-                          FactorRange, HoverTool, OpenURL, Plot, Rect, TapTool)
+from bokeh.models import (
+    CategoricalAxis,
+    CategoricalScale,
+    ColumnDataSource,
+    FactorRange,
+    HoverTool,
+    OpenURL,
+    Plot,
+    Rect,
+    TapTool,
+)
 from bokeh.resources import INLINE
 from bokeh.util.browser import view
 
@@ -29,29 +38,35 @@ for name in groups.__all__:
 
 css3_colors = pd.DataFrame(data, columns=["Name", "Color", "Group"])
 
-source = ColumnDataSource(dict(
-    names  = list(css3_colors.Name),
-    groups = list(css3_colors.Group),
-    colors = list(css3_colors.Color),
-))
+source = ColumnDataSource(
+    dict(
+        names=list(css3_colors.Name),
+        groups=list(css3_colors.Group),
+        colors=list(css3_colors.Color),
+    )
+)
 
 xdr = FactorRange(factors=list(css3_colors.Group.unique()))
 ydr = FactorRange(factors=list(reversed(css3_colors.Name)))
 x_scale, y_scale = CategoricalScale(), CategoricalScale()
 
-plot = Plot(x_range=xdr, y_range=ydr, x_scale=x_scale, y_scale=y_scale, width=600, height=2000)
+plot = Plot(
+    x_range=xdr, y_range=ydr, x_scale=x_scale, y_scale=y_scale, width=600, height=2000
+)
 plot.title.text = "CSS3 Color Names"
 
-rect = Rect(x="groups", y="names", width=1, height=1, fill_color="colors", line_color=None)
+rect = Rect(
+    x="groups", y="names", width=1, height=1, fill_color="colors", line_color=None
+)
 rect_renderer = plot.add_glyph(source, rect)
 
-xaxis_above = CategoricalAxis(major_label_orientation=pi/4)
-plot.add_layout(xaxis_above, 'above')
+xaxis_above = CategoricalAxis(major_label_orientation=pi / 4)
+plot.add_layout(xaxis_above, "above")
 
-xaxis_below = CategoricalAxis(major_label_orientation=pi/4)
-plot.add_layout(xaxis_below, 'below')
+xaxis_below = CategoricalAxis(major_label_orientation=pi / 4)
+plot.add_layout(xaxis_below, "below")
 
-plot.add_layout(CategoricalAxis(), 'left')
+plot.add_layout(CategoricalAxis(), "left")
 
 url = "http://www.colors.commutercreative.com/@names/"
 tooltips = f"Click the color to go to:<br /><a href='{url}'>{url}</a>"

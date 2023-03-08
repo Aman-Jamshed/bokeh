@@ -11,6 +11,7 @@ Navigate to the specific color by tapping.
     :keywords: groups, hover, color, tap, tooltip
 
 '''
+
 from math import pi
 
 import pandas as pd
